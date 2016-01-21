@@ -11,10 +11,10 @@ module.exports.sendAuthReq = function sendAuthenticationRequest(){
     var xml = buildXmlInput(requestData);
 
     var options = {
-        host: 'auth.uidai.gov.in',
-        path: requestData.path,
-        method: 'GET',
-        headers: {
+        "host": constants.public_config_attrs.host,
+        "path": requestData.path,
+        "method": 'GET',
+        "headers": {
             "Content-Type":"application/xml"
         }
     };
@@ -22,7 +22,7 @@ module.exports.sendAuthReq = function sendAuthenticationRequest(){
 }
 
 function buildAuthenticationRequest(req){
-    var url = URLbuilder(true,req.params.uid);
+    var path = pathBuilder(true,req.params.uid);
 
     var inputData = {};
 
@@ -30,10 +30,10 @@ function buildAuthenticationRequest(req){
 }
 
 
-//url will be of the form https://<host>/<ver>/<ac>/<uid[0]>/<uid[1]>/<asalk>
-//public is a boolean for testing/development url
-//uid is the aadhaar number
-function URLbuilder(public,uid){        // puboolean for testing/development url vs production
+// url will be of the form https://<host>/<ver>/<ac>/<uid[0]>/<uid[1]>/<asalk>
+// public is a boolean for testing/development url
+// uid is the aadhaar number
+function pathBuilder(public,uid){        // boolean for testing/development url vs production
 
     if(public)
         return developmentURL(uid);
@@ -42,20 +42,22 @@ function URLbuilder(public,uid){        // puboolean for testing/development url
 }
 
 function developmentURL(uid){
-    var url = constants.url_template;
-    url = url.replace("<host>","auth.uidai.gov.in");
-    url = url.replace("<ver>",constants.currentAPIVersion);
-    url = url.replace("<ac>","public");
-    url = url.replace("<uid[0]>",uid.charAt(0));
-    url = url.replace("<uid[1]>",uid.charAt(1));
+
+    //var url = constants.url_template;
+    //url = url.replace("<host>","auth.uidai.gov.in");
+    //url = url.replace("<ver>",constants.currentAPIVersion);
+    //url = url.replace("<ac>","public");
+    //url = url.replace("<uid[0]>",uid.charAt(0));
+    //url = url.replace("<uid[1]>",uid.charAt(1));
+
     url = url.replace("<asalk>",constants.public_config_attrs.asalk);
-    return url;
+    var path = "/"+constants.currentAPIVersion+"/public/"+uid.charAt(0)+"/"+uid.charat(1)+"/"+constants.public_config_attrs.asalk;
+    return path;
 }
 
 function productionURL(uid){
     //not at production stage
 }
-
 function buildXmlInput(requestData)
 {
     var xmlBuilder = builder.create('Auth');
@@ -120,6 +122,10 @@ function createHmac(inputData){
     inputData.hmac = hmac.digest('base64');
 }
 
+//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmssSSS");
+//String txn = "AuthDemoClient" + ":" + aua + ":" + dateFormat.format(new Date());
+//return txn;
+
 //timestamp should be in the format YYYY-MM-DDThh:mm:ss
 function formatTimeStamp(timestamp){
 
@@ -152,4 +158,9 @@ function encryptWithPublicKey(inputData)
     var skey = key.encrypt(inputData.skey,'base64');
 
     inputData.skey = skey;
+}
+
+function signXML(inputData)
+{
+
 }

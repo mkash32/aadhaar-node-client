@@ -17,6 +17,7 @@ module.exports.currentAPIVersion = '1.6';   //current version of the Aadhaar Aut
 
 module.exports.public_config_attrs = {
     "asalk":"MLTbKYcsgYMq1zgL3WMZYrnyvsarlljxpom2A-QTPc0Zud23shpnqPk",
+    "host":"auth.uidai.gov.in",
     "ac":"public",
     "sa":"public",
     "tid":"public",
