@@ -14,7 +14,6 @@ module.exports.currentAPIVersion = '1.6';   //current version of the Aadhaar Aut
 //ci :- expiry date of the certificate, should be of the form YYYYMMDD
 //      current certificate has expiration date of 16 Sept 2020, 20200916
 
-
 module.exports.public_config_attrs = {
     "asalk":"MLTbKYcsgYMq1zgL3WMZYrnyvsarlljxpom2A-QTPc0Zud23shpnqPk",
     "host":"auth.uidai.gov.in",
@@ -22,10 +21,10 @@ module.exports.public_config_attrs = {
     "sa":"public",
     "tid":"public",
     "ver": "1.6",
-    "txn": "TBD",
+    "txn": "6",
     "lk": "MLTbKYcsgYMq1zgL3WMZYrnyvsarlljxpom2A-QTPc0Zud23shpnqPk",
     "pi": "y",
-    "udc": "TBD",
+    "udc": "nodeclient1",
     "fdc": "NA",
     "idc": "NA",
     "pip": "NA",

@@ -3,7 +3,7 @@
  */
 // Verhoeff algorithm validation check, by Avraham Plotnitzky. (aviplot at gmail)
 // Should be used to check the UID before any request is made
-module.exports.verhoeffCheck = (function()
+module.exports = verhoeffCheck = (function()
 {
     var d = [[0,1,2,3,4,5,6,7,8,9],
         [1,2,3,4,0,6,7,8,9,5],

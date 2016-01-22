@@ -3,6 +3,7 @@
  */
 var SignedXml = require('xml-crypto').SignedXml,
     FileKeyInfo = require('xml-crypto').FileKeyInfo,
+    builder = require('xmlbuilder'),
     fs = require('fs');
 
 //should be extracted manually from sig.crt.pem
@@ -52,12 +53,12 @@ function AadhaarKeyInfo(){
 }
 
 //signs and returns final xml to be sent
-modules.exports.signXML = function(xml){
+module.exports.signXML = function(xml){
 
     var sig = new SignedXml();
-    sig.signingKey = fs.readFileSync("./../templates/sig.key.pem");
+    sig.signingKey = fs.readFileSync("templates/sig.key.pem");
     sig.addReference("//*[local-name(.)='Auth']", ["http://www.w3.org/2000/09/xmldsig#enveloped-signature"], "http://www.w3.org/2000/09/xmldsig#sha1", "", "", "", true)
-    sig.keyInfoProvider = new MyKeyInfo();
+    sig.keyInfoProvider = new AadhaarKeyInfo();
 
     sig.computeSignature(xml);
 
