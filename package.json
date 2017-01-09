@@ -12,6 +12,9 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "node-rsa": "^0.4.2",
+    "serve-favicon": "~2.3.0",
+    "xml-crypto": "^0.8.5",
+    "xmlbuilder": "^8.2.2"
   }
 }
